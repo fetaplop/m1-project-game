@@ -4,25 +4,6 @@
 
 The player tries to hit arrow keys on their keyboard in sync with arrows falling from the top of the screen as they hit the bottom of the screen. Points are gained by hitting the right key at the right time. There may or may not be a time limit.
 
-## Classes
-
-### There will be a class describing the game and a class describing the arrows.
-
-
-
-# Project's name
-
-## Description
-Brief description of the project
-
-
-# Unnamed rhythm game
-
-## Stepmania-ish game
-
-The player tries to hit arrow keys on their keyboard in sync with arrows falling from the top of the screen as they hit the bottom of the screen. Points are gained by hitting the right key at the right time. There may or may not be a time limit.
-
-
 
 ## MVP (DOM - CANVAS)
 	- Arrows (boxes to begin with) fall on their assigned "lanes" from screen top to bottom.
@@ -38,7 +19,7 @@ The player tries to hit arrow keys on their keyboard in sync with arrows falling
 - Actually synced with music.
 -> This means hard-coded strikes.
 
--if this is impossible, change the design to be a reaction game.
+- if this is impossible, change the design to be a reaction game.
 -> the blocks start falling faster after set intervals
 
 
@@ -101,5 +82,4 @@ URls for the project repo and deploy
 
 ### Slides
 URls for the project presentation (slides)
-
 
