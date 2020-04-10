@@ -22,6 +22,8 @@ The player tries to hit arrow keys on their keyboard in sync with arrows falling
 - if this is impossible, change the design to be a reaction game.
 -> the blocks start falling faster after set intervals
 
+- visual effects on arrow-boxes (hilight if key stroke in sync etc)
+
 
 ## Data structure
 	1. index.html
@@ -45,39 +47,90 @@ removeScreen
 window eventListener start on load
 
 ### 3. game.js
+#### properties:
+ctx
+canvas
+gameScreen
+"arrow-goals" that should align with falling arrows
+score
+timer
+
+#### methods:
+eventListener for key presses -> highlight pressed key
+check if collision (between arrow and arrow-goal)
+check if correct key press
+check if key press was within acceptable accuracy
+update score
+update positions
+loop to remove old + draw new frame
+check if time is up
 
 ### 4. arrow.js
+#### properties:
+canvas
+ctx
+size
+arrowType (up, down, left, right)
+image
+position x (depends on arrowType)
+position y
+speed
 
+#### methods:
+update position
+draw image
+amIonScreen
 
 ## States and State Transitions
 
-- SplashScreen
-    Display splash screen
-    Start game when start is pressed
-- GameScreen
-    game runs while timer has not run out
-    when timer = 0, go to game over screen
-- Gameover
-    diplay player points
-    display high scores
-    if restart button is pressed, go to game screen
+SplashScreen
+   - Display splash screen
+   - Start game when start is pressed
+
+GameScreen
+   - game runs while timer has not run out
+   - when timer = 0, go to game over screen
+
+Gameover // sos how to make indentation work with md?
+   - diplay player points
+   - display high scores
+   - if restart button is pressed, go to game screen
 
 
 ## Task
-Task definition in order of priority
+- git + github
+- html boilerplate
+- connect all files
+- buildDom
+- create screens in main
+- make screen transitions in main
+- create game constructor
+- make the game loop
+- arrow constructor
+- create moving arrows inside game loop
+- check arrow collision on arrow-boxes
+- make keyListeners
+- change arrow-box style if key was pressed
+- check if arrow hitting arrow-box + key press were in sync
+- score
+- timer
+- dislay result in gameover
+- add images
+- add other visual styles
+- scoreboard
 
 
 ## Links
 
 
 ### Trello
-[Link url](https://trello.com)
+[trello](https://trello.com/b/UGy7IOLt/m1-project-game#)
 
 
 ### Git
 URls for the project repo and deploy
-[Link Repo](http://github.com)
-[Link Deploy](http://github.com)
+[Link Repo](http://github.com) uhh
+[Link Deploy](http://github.com) erm
 
 
 ### Slides
