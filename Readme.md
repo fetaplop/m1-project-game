@@ -103,7 +103,9 @@ Gameover // sos how to make indentation work with md?
 - connect all files
 - buildDom
 - create screens in main
-- make screen transitions in main
+- make screen transitions in main // this is now done!
+
+### these remain:
 - create game constructor
 - make the game loop
 - arrow constructor
