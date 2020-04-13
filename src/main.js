@@ -26,9 +26,18 @@ let splashStr = `
     </main>
 `
 let gameStr = `
-    <main>
-        <h1>this  g a m e </h1>
-        <button>pointless button minä lopetan pelin että saadaan transitiot testattua</button>
+    <main class = "game-container">
+        <header>
+            <h1>this  g a m e </h1>
+            <div class="score">
+                <h3>some stuff here if we need, score at least</h3>
+                <span class="value"> tänne pittää osoittaa jotenki se score, mulla on class score, sub class value <span\>
+            </div>
+        </header> <!-- ehkä se timer yms tänne-->
+            <div class = "canvas-container">
+                <canvas></canvas> <!-- this is too small!!! why?! -->
+            </div>
+            <button>pointless button minä lopetan pelin että saadaan transitiot testattua</button>
     </main>
 `
 let gameOver = `
@@ -89,6 +98,12 @@ function startGame() {
     // täältä pitäis kutsua uus peli ja pelin ite pitäis tietää sillon ku se loppuu.
     // silloin uuden pelin invoken jälkeen kun se on suorittanut loppuun voi vaan suoraan ajaa andGamen, joka saa
     // pelitltä scoren. eli ei mittään iffiä että onko peli loppunu tänne mainiin!
+
+    game = new Game();
+    game.gameScreen = gameScreen; // question, why we do it like this?
+    // gameScreen is now set, now we need to jump into the loop by invoking it through our new game object
+
+    game.start();
 }
 
 function endGame(score) { // it's a very good idea to import score to gameover screen

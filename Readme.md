@@ -114,7 +114,7 @@ Gameover // sos how to make indentation work with md?
 - make keyListeners
 - change arrow-box style if key was pressed
 - check if arrow hitting arrow-box + key press were in sync
-- score
+- score 
 - timer
 - dislay result in gameover
 - add images
