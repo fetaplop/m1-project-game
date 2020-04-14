@@ -104,8 +104,6 @@ Gameover // sos how to make indentation work with md?
 - buildDom
 - create screens in main
 - make screen transitions in main // this is now done!
-
-### these remain:
 - create game constructor
 - make the game loop
 - arrow constructor
@@ -132,9 +130,9 @@ Gameover // sos how to make indentation work with md?
 ### Git
 URls for the project repo and deploy
 [Link Repo](http://github.com) uhh
-[Link Deploy](http://github.com) erm
+[Link Deploy hosted by GitHub](https://fetaplop.github.io/m1-project-game/)
 
 
 ### Slides
-URls for the project presentation (slides)
+URls for the project presentation [Google slides](https://docs.google.com/presentation/d/1fADS9TJ1p2xlASEBgkmZ8av84xYwjbxrhJwSp7mYoDE/edit?usp=sharing)
 
