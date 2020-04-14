@@ -2,15 +2,14 @@
 
 class Game {
     constructor() {
-        this.arrows = []; // reserved but not used yet, kai ne pitää olla pelissä kans määritelty??
-        this.arrowBoxes = []; // pitäiskö tää tehä toisin?
+        this.arrows = []; // holds arrow objects
+        this.arrowBoxes = []; // dont really need this atm
         this.timeIsUp = false; // teenkö timerin erikseen???
-        this.timer = 0; // tässä tää nyt on
+        this.timer = 0; // it's a fake! just counting animation frames lol
         this.score = 0;
         this.gameScreen = null;
         this.canvas = null;
         this.ctx = null;
-        //this.size = 10;
 
     }
 
@@ -37,35 +36,24 @@ class Game {
         //thats visual presets, 
         //// event listener
         const keyPressListener = function (event) {
-            if ((event.key === "ArrowLeft") && ( this.arrows[0].isAligned === true )) { // test arrow is set to be "left"
+            if (event.key === "ArrowLeft") { // test arrow is set to be "left"
                 // func to check if it is correct + if it is timed right..
                 // return "left" ????
-                keyPressMatchesArrow("left")
+                this.keyPressMatchesArrow("left") // sending info on what key was pressed to this function
                 console.log("HEY MOM I'M PRESSING THE LEFT ARROW");
             } else {// ??????????????????
                 console.log("hey dont go pressing those buttons just whenever");
             }
 
 
-            // if key is presssed, do this...
         }.bind(this); // bound to game object! (instead of window)
 
         document.addEventListener("keydown", keyPressListener); // should be checked continually until key press ends
 
-        //now the game loop
-        //
-        console.log("start was invoked and we made it to the end of setting visuals!")
-        // make arrow-boxes
+        console.log("start was invoked and we made it to the end of setting visuals and making event listener!")
 
 
-
-
-
-        // here we define how many of them we need, the placement of them should be defined in arr
-
-        // muista se bind!!!!!
-
-        // nyt aloitetaan game loop!
+        // here we jump into the game loop!
         console.log("next we're trying to invoke startingLoop() which in turn invokes the gameLoop")
         this.startingLoop();
         console.log("this is coming after invoking startingLoop()")
@@ -78,7 +66,25 @@ class Game {
         // i should have recursive structure def func loop .... invoke loop()
         const gameLoop = function () {
             let testArrow;
-            // start making arrows and listening to key strokes and whatnot
+            // start making arrows
+
+
+
+            // stealing this spawning condition, might tweak later
+            if (Math.random() > 0.98) {
+                // random arrowtype
+                let arrowLotto = ["left", "right"];
+                let randomArrow = arrowLotto[(Math.round(Math.random() * (arrowLotto.length - 1)))]; // referencing by index
+                const newArrow = new Arrow(this.canvas, randomArrow, 5);
+                this.arrows.push(newArrow);
+
+            }
+
+            // we're not looping thru this arrow array
+
+            console.log(this.arrows);
+
+
             if (this.arrows.length === 0) {
                 testArrow = new Arrow(this.canvas, "left", 3);
                 this.arrows.push(testArrow);
@@ -103,18 +109,21 @@ class Game {
 
             // clear canvas
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            this.drawBox(20); // just give the x-axis position here, the rest is preset inside drawBox()
-            this.drawBox(60);
-            this.drawBox(100);
+
+            // then draw stuff
+            // no point really giving these names but its more descriptive
+            let leftBox = this.drawBox(20); // just give the x-axis position here, the rest is preset inside drawBox()
+            let middleBox = this.drawBox(60);
+            let rightBox = this.drawBox(100);
             testArrow.draw();
 
             // we dont have a timer yet but.. let's make it somehow happen
-            this.score++;
-            if (this.score > 300) {
+            this.timer++;
+            if (this.timer > 300) {
                 this.gameOver();
             } // keskekn!!!
-            else if (this.score % 10 === 0) {
-                console.log(this.score);
+            else if (this.timer % 10 === 0) {
+                console.log(this.timer);
             }
 
             // if the game has not ended, keep loopin
@@ -126,13 +135,19 @@ class Game {
         // now we have to invoke the gameLoop so that we enter it once and can exit it from within
         gameLoop();
     }
-
-    keyPressMatchesArrow(arrowtype) {
+    // this one is called from keyPresslistener and it should do diff things depending on the keypress
+    keyPressMatchesArrow(arrowtype) { // left, right, up, down
         // arrow know its type ("left")
-        if (arrowtype === "left" )  {
+        console.log(`what is this??? this: ${this}`);
+        if (arrowtype === "left") {
             // do something
-            //
+            // if there is a "left" arrow with state "isAligned" we should give player points
             console.log("left key was pressed");
+            if (this.arrows[0].isAligned === true) { // now this only works if I know where exavtly it is...
+                console.log("you get a point!");
+                console.log(`how about this this???: ${this}`);
+                this.score++;
+            }
         }
     }
 
@@ -154,7 +169,7 @@ class Game {
 
         this.ctx.fillStyle = "black";
         //syntax: ctx.fillRect(x, y, width, height)
-        this.ctx.fillRect(box_x, box_y, size, size); 
+        this.ctx.fillRect(box_x, box_y, size, size);
     }
 
 

@@ -129,8 +129,8 @@ Gameover // sos how to make indentation work with md?
 
 ### Git
 URls for the project repo and deploy
-[Link Repo](http://github.com) uhh
-[Link Deploy hosted by GitHub](https://fetaplop.github.io/m1-project-game/)
+[uhh this still points to github.com](http://github.com) 
+[Deploy link hosted by GitHub](https://fetaplop.github.io/m1-project-game/)
 
 
 ### Slides
