@@ -75,7 +75,7 @@ class Arrow {
 
     //drawHit() {}
 
-    boxCollision() {
+    boxCollision() { // this method could also update the game.js arrowbox????
         let top = this.y;
         let bottom = top + this.size;
         // x depends on arrrow type, we don't need to check for x-colliosion, only need it for drawing
@@ -84,8 +84,8 @@ class Arrow {
             switch (true) { // checking if the arrow is completely inside the hit area!
                 case this.type === "left":
                     // hit the left box!
-                    console.log("left arrow hit the hit are")
-                    console.log(`my y is ${this.y}, top:${top}  and bottom ${bottom}`)
+                    console.log("left arrow hit the hit area")
+                    //console.log(`my y is ${this.y}, top:${top}  and bottom ${bottom}`)
                     return true; // we could return  something additionally here so that we can tell the hit box to light up!
                 case this.type === "right":
                     console.log("right arrow hit the hit area!")
@@ -93,7 +93,7 @@ class Arrow {
                 default:
                     return false;
             }
-        }   
+        }
 
         /*switch(expression) {
             case x:

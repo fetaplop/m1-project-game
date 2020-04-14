@@ -37,10 +37,16 @@ class Game {
         //thats visual presets, 
         //// event listener
         const keyPressListener = function (event) {
-            if (event.key === "ArrowLeft") {
+            if ((event.key === "ArrowLeft") && ( this.arrows[0].isAligned === true )) { // test arrow is set to be "left"
                 // func to check if it is correct + if it is timed right..
-                // return "left"
+                // return "left" ????
+                keyPressMatchesArrow("left")
+                console.log("HEY MOM I'M PRESSING THE LEFT ARROW");
+            } else {// ??????????????????
+                console.log("hey dont go pressing those buttons just whenever");
             }
+
+
             // if key is presssed, do this...
         }.bind(this); // bound to game object! (instead of window)
 
@@ -51,9 +57,7 @@ class Game {
         console.log("start was invoked and we made it to the end of setting visuals!")
         // make arrow-boxes
 
-        this.drawBox(20); // just give the x-axis position here, the rest is preset inside drawBox()
-        this.drawBox(60);
-        this.drawBox(100);
+
 
 
 
@@ -80,11 +84,13 @@ class Game {
                 this.arrows.push(testArrow);
             }
             // we need just 1
-            //if (!this.arrows.length === 0) {
-            //}
+
             testArrow = this.arrows[0];
 
             testArrow.updatePosition();
+
+            // did the arrow hit the box
+            // did we hit the right key then?
             if (testArrow.boxCollision() === true) {
                 testArrow.isAligned = true; // CHANGED THIS TO HILIGHT A HIT
                 console.log("we hit something!")
@@ -92,18 +98,25 @@ class Game {
                 // we have to assign the alignment property to false
                 testArrow.isAligned = false;
             }
+
+
+
             // clear canvas
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            this.drawBox(20); // just give the x-axis position here, the rest is preset inside drawBox()
+            this.drawBox(60);
+            this.drawBox(100);
             testArrow.draw();
+
             // we dont have a timer yet but.. let's make it somehow happen
             this.score++;
-
             if (this.score > 300) {
                 this.gameOver();
             } // keskekn!!!
             else if (this.score % 10 === 0) {
                 console.log(this.score);
             }
+
             // if the game has not ended, keep loopin
             if (this.timeIsUp === false) {
                 requestAnimationFrame(gameLoop);
@@ -114,34 +127,36 @@ class Game {
         gameLoop();
     }
 
-    gameOver() {
-        this.timeIsUp = true;
-        // we should export the score from here!
-        console.log("Time is up!!! we're in class Game, method gameOver!!");
+    keyPressMatchesArrow(arrowtype) {
+        // arrow know its type ("left")
+        if (arrowtype === "left" )  {
+            // do something
+            //
+            console.log("left key was pressed");
+        }
     }
 
-    drawBox(box_x) {
+    gameOver() {
+        // we should export the score from here!
+        this.timeIsUp = true;
+        console.log("Time is up!!! we're in class Game, method gameOver!!");
+        // let's call screen transition from main
+        endGame(this.score);
+    }
+
+    drawBox(box_x) { // this is only called in the beginning and the boxes disappera when gameloop cleans the canvas
         // box size is hardcoded here
         // box_y is hardcoded here
         //console.log("helllooooo?? do we ever get here??????????");
 
-        const size = 100;
-        const box_y = 80;
+        const size = 30;
+        const box_y = 200;
 
         this.ctx.fillStyle = "black";
-        // ctx.fillRect(x, y, width, height)
-        this.ctx.fillRect(box_x, box_y, size, size); // is it not taking in size? it's not working with numeric values
-        // doesn't work even if i set this.size in properties and use it here.
+        //syntax: ctx.fillRect(x, y, width, height)
+        this.ctx.fillRect(box_x, box_y, size, size); 
     }
 
-    // ehkä kannattaa luoda oma class arrow-boxeille.
-    // ne voi määritää tässä startissa ja antaa argumenttina tää canvas(!!!) ja montako boxii halutaan
-    // ne varmaan kannatta flex boxata paikoilleen
-    // jos rakentaa sen alusta alkaen näin, on helpompi tehä ensin yks ja sit useempi box (ja niille arrowit)
-
-    // next method
-    // so now we create the arrow-boxes inside start()!!!!!!!!!!!!
-    // maybe then we start populating screen woth arrows
 
 }
 // Class Game...

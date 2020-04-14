@@ -73,6 +73,7 @@ function createGameScreen(htmlstring) {
     document.body.appendChild(gameScreen);
     //restartBtn.addEventListener("click", startGame); mallina tässä!
     const turhaButton = gameScreen.querySelector("button");
+    // this isn't breaking the gameloop now!!! gameloop only looks if the timer has run out.
     turhaButton.addEventListener("click", endGame); // muista et endGame -funktio kutsutaan ilman () koska se on vaan muuttujanimi sille funktiolle!
 }
 
@@ -107,6 +108,7 @@ function startGame() {
 function endGame(score) { // it's a very good idea to import score to gameover screen
     removeScreen();
     createGameOver(gameOver);
+    console.log(`I got the score: -- ${score} pts -- from game obj, hopefully`)
     // huoma scorella ei vielä tehä mitään! sen pitäis tulla tuolta game.js:stä 
 
     // 
