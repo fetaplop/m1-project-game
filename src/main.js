@@ -35,7 +35,7 @@ let gameStr = `
             </div>
         </header> <!-- ehkä se timer yms tänne-->
             <div class = "canvas-container">
-                <canvas></canvas> <!-- this is too small!!! why?! -->
+                <canvas></canvas>
             </div>
             <button>pointless button minä lopetan pelin että saadaan transitiot testattua</button>
     </main>
@@ -64,8 +64,6 @@ function createSplashScreen(splashString) {
     startBtn.addEventListener("click", function () {
         startGame();
     });
-
-    // add here a const = start button with evenlistener
     // eventlistener call back func should be startGame!
 }
 

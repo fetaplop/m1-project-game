@@ -1,8 +1,14 @@
 canvas {
     background-color: blueviolet;
+    height: 600px;
 }
 
 /*
 note! ehkä vielä game-conatiner class sinne main.js:ään??
+
+noniii voi vittu. eli se class "canvas-container" literally vaan pitää sisällään tän canvasin, en välttämättä oikeesti ees tarvis sitä mut I 
+guess se on olemassa että siihen voi laittaa jonku taustakuvan vaikka
+
+en myöskään tiiä miks helvetissä se revitty korkeus on jtn 154 pikseliä atm mut sen v oi hardkoodata tähän
 
 */
