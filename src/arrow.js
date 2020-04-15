@@ -24,20 +24,17 @@ class Arrow {
         this.ctx = this.canvas.getContext("2d"); // i think we need this
         this.size = 10;
         this.y = 0;
-        //this.top = this.y; // for collision
-        //this.bottom = this.top + this.size; // for collision
         // x is determined by type, same as fillcolour
         this.speed = speed;
         this.type = type;
-        this.isAligned = null;
-        this.x = null;
+        this.isAligned = null; // aligned with hitbox true/false -> changes colour + used to give pts
+        this.x = null; // this is set in draw() depending on arrow type! x is not important otherwise
     }
     //methods:
     updatePosition() {
         this.y = this.y + this.speed;
         //console.log("updatePosotion() called")
     }
-
 
     draw() {
         //maybe we could set here that if the type is "belowScreen", just return or something. or remove it in the array? not update position?
@@ -46,7 +43,7 @@ class Arrow {
         // depends on arrrow type
         if (this.isAligned === true) {
             colour = "yellow";
-            // doesnt x persist from before??
+            // doesnt x persist from before?? -> it does. also, omitting x should never be an issue since no arrow is aligned in the beginning
         } else {
 
             if (this.type === "left") {
@@ -55,12 +52,12 @@ class Arrow {
             }
             else if (this.type === "right") {
                 colour = "green"
-                this.x = 150;
+                this.x = 420;
             }
 
             else if (this.type === "up") {
                 colour = "blue";
-                this.x = 100;
+                this.x = 200;
             }
 
             else {
@@ -73,22 +70,20 @@ class Arrow {
         this.ctx.fillRect(this.x, this.y, this.size, this.size);
     }
 
-    //drawHit() {}
-
     boxCollision() { // this method could also update the game.js arrowbox????
         let top = this.y;
         let bottom = top + this.size;
         // x depends on arrrow type, we don't need to check for x-colliosion, only need it for drawing
         // collision range for y should be same
-        if ((bottom >= 200) && (top <= 300)) {
+        if ((bottom >= 500) && (top <= 560)) {
             switch (true) { // checking if the arrow is completely inside the hit area!
                 case this.type === "left":
                     // hit the left box!
-                    console.log("left arrow hit the hit area")
+                    //console.log("left arrow hit the hit area")
                     //console.log(`my y is ${this.y}, top:${top}  and bottom ${bottom}`)
                     return true; // we could return  something additionally here so that we can tell the hit box to light up!
                 case this.type === "right":
-                    console.log("right arrow hit the hit area!")
+                    //console.log("right arrow hit the hit area!")
                     return true;
                 default:
                     return false;

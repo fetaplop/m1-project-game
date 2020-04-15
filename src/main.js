@@ -40,10 +40,10 @@ let gameStr = `
             <button>pointless button minä lopetan pelin että saadaan transitiot testattua</button>
     </main>
 `
-let gameOver = `
+let gameOverStr = `
     <main>
         <h1> g a m e  over</h1>
-        <h2>your score string interpolation</h2>
+        <h2>your score string interpolation: <span></span> </h2>
         <button>restart button</button>
     </main>
 `
@@ -77,8 +77,11 @@ function createGameScreen(htmlstring) {
     turhaButton.addEventListener("click", endGame); // muista et endGame -funktio kutsutaan ilman () koska se on vaan muuttujanimi sille funktiolle!
 }
 
-function createGameOver(overString) {
+function createGameOver(overString, score) {
     gameOverScreen = buildDom(overString);
+    let yourScore = gameOverScreen.querySelector("span");
+    yourScore.innerHTML = `${score}`;
+
     const restartBtn = gameOverScreen.querySelector("button");
     restartBtn.addEventListener("click", startGame);
     // add button just like is splash
@@ -106,8 +109,9 @@ function startGame() {
 }
 
 function endGame(score) { // it's a very good idea to import score to gameover screen
+    // pretty sure täällä vois handlata sen et jos klikkaa end game gameScreenissä nii vois vaan asettaa et timeIsUp true to quit gameloop
     removeScreen();
-    createGameOver(gameOver);
+    createGameOver(gameOverStr, score); // gameOverStr
     console.log(`I got the score: -- ${score} pts -- from game obj, hopefully`)
     // huoma scorella ei vielä tehä mitään! sen pitäis tulla tuolta game.js:stä 
 

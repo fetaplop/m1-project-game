@@ -30,3 +30,19 @@ vast: koska me käytetään class-rakennetta ja määritellään uusia properyj�
 okei onks tyhmää jos määrittelen jotain siellä arrow-box classissa sillai et se menee flex boxiin???
 
 vast: kinda joo, koska canvas ei tunne sellasta juttua ku flexbox :D eli unoha koko juttu
+
+------------------
+
+mihin se keylistener kannattaa laittaa? täytyy tarkistaa että oikee key press tapahtui oikean arrowin suhteen. (kun se tietty arrow on tietyllä korkeudella)
+
+vast:
+------------------
+
+so I guess i hav to draw the hitboxes every time?? would be optimal to update it if u press the corresponding key...
+vast:
+
+-------------
+so does he execution actually stop when we reach timeOver????
+
+
+
