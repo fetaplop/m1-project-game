@@ -40,12 +40,12 @@ class Game {
                 // func to check if it is correct + if it is timed right..
                 this.keyPressMatchesArrow("left") // sending info on what key was pressed to this function
                 //console.log("HEY MOM I'M PRESSING THE LEFT ARROW!");
-            } 
+            }
             else if (event.key === "ArrowRight") {
                 this.keyPressMatchesArrow("right");
                 //console.log("right key pressed timely!");
             }
-            
+
             /*else {// maybe just not have this block at all ?????
                 this.keyPressMatchesArrow("WRONG")
                 console.log("hey dont go pressing those buttons just whenever");
@@ -60,30 +60,32 @@ class Game {
 
 
         // here we jump into the game loop!
-        console.log("next we're trying to invoke startingLoop() which in turn invokes the gameLoop")
-        this.startingLoop();
-        console.log("this is coming after invoking startingLoop()")
+        console.log("next we're trying to invoke startGameLoop() which in turn invokes the gameLoop")
+        this.startGameLoop();
+        console.log("this is coming after invoking startGameLoop()")
     }
 
-    startingLoop() { 
+    startGameLoop() {
         // recursive structure creating a game loop, bind()ing it to the game object and then calling itself
-        
+
         const gameLoop = function () {
-           
+
             // start making arrows:
             // maybe dont make new arrows when we're close to time running out
             // DAMMIT JUST REALISED THIS COULD/SHOULD BE TIED TO THE TIMER (or its modulo 60 or somethignn)
-            
+
             // requestanimationframe runs at ~60 Hz -> check every half second if should generate arrows
 
-            if (Math.random() > 0.90) { // stealing this spawning condition, might tweak later
+            
+                
+            if ((this.timer % 30 === 0) && (Math.random() > 0.40)) { // stealing this spawning condition, might tweak later
                 // random arrowtype:
                 let arrowLotto = ["left", "right"];
                 // statistics ppl look away now
                 let randomArrow = arrowLotto[(Math.round(Math.random() * (arrowLotto.length - 1)))]; // referencing by index
-                const newArrow = new Arrow(this.canvas, randomArrow, 2);
+                const newArrow = new Arrow(this.canvas, randomArrow, 10);
                 this.arrows.push(newArrow);
-
+                
             }
 
             //testArrow = this.arrows[0];
@@ -100,6 +102,16 @@ class Game {
             // -> this is naw arrowAlignedWithBox(takes in arrow)
 
             // HERE looping thru arrow array and updating position and checking if aligned
+
+
+            // get rid of arrows that are below screen
+            const visibleArrows = this.arrows.filter( function (arrow) {
+                const visibleArrow = arrow.isOnScreen();
+                return visibleArrow;
+            } )
+            this.arrows = visibleArrows;
+
+            // update arrow positions and check if they hit the hitbox
             this.arrows.forEach(arrow => { // added this!
                 arrow.updatePosition();
                 this.arrowAlignedWithBox(arrow); // this????
@@ -119,13 +131,13 @@ class Game {
             //testArrow.draw();
             // forEach arrow THAT IS ON SCREEN, draw()
 
-            this.arrows.forEach(arrow => { // added this!
+            this.arrows.forEach(arrow => { // added this keywd!
                 arrow.draw();
             });
 
             // we dont have a timer yet but.. let's make it somehow happen
             this.timer++;
-            if (this.timer >= 600) {
+            if (this.timer >= 800) {
                 this.gameOver();
             } // keskekn!!!
             else if (this.timer % 10 === 0) {
@@ -144,13 +156,13 @@ class Game {
     }
 
     // this one is called from keyPresslistener and it should do diff things depending on the keypress
-      keyPressMatchesArrow(arrowtypeStr) { // left, right, up, down
+    keyPressMatchesArrow(arrowtypeStr) { // left, right, up, down
 
         if (arrowtypeStr === "left") { // if there is a "left" arrow with state "isAligned" we should give player points
             this.arrows.forEach(arrow => {
                 if ((arrow.type === "left") && (arrow.isAligned === true)) {
                     console.log("found inside keylistener(start level) inside keypressmatchesArrow(game level), logging: key-matching arrow is aligned with hitbox");
-                    this.score += 200;
+                    this.updateScore(200);
                 }
                 // tried doing else block, failed :D              
             });
@@ -158,8 +170,8 @@ class Game {
         // else if other type arrow..
         else if (arrowtypeStr === "right") {
             this.arrows.forEach(arrow => {
-                if ((arrow.type === "right") && (arrow.isAligned === true) ) {
-                    this.score += 200;
+                if ((arrow.type === "right") && (arrow.isAligned === true)) {
+                    this.updateScore(200);
                     console.log("giving 200 pts for hitting right arrow at right time")
                 }
                 /*else if ( (arrow.type === "right") && (arrow.isAligned === false) ) {
@@ -184,6 +196,10 @@ class Game {
     }
 
     // method for updating score??    
+    updateScore(givenScore) {
+        this.score += givenScore;
+        this.scoreElement.innerHTML = this.score;
+    }
 
     gameOver() {
         // we should export the score from here!

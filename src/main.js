@@ -31,7 +31,11 @@ let gameStr = `
             <h1>this  g a m e </h1>
             <div class="score">
                 <h3>some stuff here if we need, score at least</h3>
-                <span class="value"> tänne pittää osoittaa jotenki se score, mulla on class score, sub class value <span\>
+                <div>
+                    <h2>Current score: 
+                    <span class="value"> span inside h2, jolla class score, sub class value <span\>
+                    </h2>
+                </div>        
             </div>
         </header> <!-- ehkä se timer yms tänne-->
             <div class = "canvas-container">

@@ -22,7 +22,7 @@ class Arrow {
     constructor(canvas, type, speed) {
         this.canvas = canvas;
         this.ctx = this.canvas.getContext("2d"); // i think we need this
-        this.size = 10;
+        this.size = 50;
         this.y = 0;
         // x is determined by type, same as fillcolour
         this.speed = speed;
@@ -103,9 +103,13 @@ class Arrow {
 
     }
 
-    amIonScreen() {
+    isOnScreen() {
         // check if y>lower limit of screen
         //return true/false
+        if (this.y < this.canvas.height) {
+            return true;
+        }
+
     }
     //    this.ctx.fillStyle = "blue";
     //      this.ctx.fillRect(this.x, this.y, this.size, this.size);

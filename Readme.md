@@ -14,6 +14,9 @@ The player tries to hit arrow keys on their keyboard in sync with arrows falling
 
 
 ## Backlog
+- disable the possibility to get double points by hitting twice in fast succession
+- change difficulty
+- reverse mode! hit the opposite key !
 - instructions
 
 - Actually synced with music.
