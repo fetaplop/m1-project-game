@@ -1,19 +1,63 @@
+@font-face {
+    font-family: "technokid";
+    src: url("fonts/linear_beam/Linebeam.ttf");
+}
+
+@font-face {
+    font-family: 'linear_beam___0.5';
+    src: url('fonts/linebeam.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "breadText";
+    src: url('fonts/Gameplay.ttf');
+}
+
+body {
+    overflow-y: hidden;
+    font-family: ;
+}
+
 canvas {
     background-color: blueviolet;
     height: 600px;
 }
 
 h1 {
-    font-size: 80px;
+    font-family: 'linear_beam___0.5';
+    font-size: 150px;
+    /*line-height: 100px;*/
+    font-style: normal;
     text-align: center;
 }
 
+.button-div {
+    text-align: center;
+    margin: 5% 0;
+}
 
 button {
-    padding: 10px;
+    padding: 15px;
+    font-family: breadText;
     font-size: 20px;
     border-radius: 5px;
-    margin: 15% 45%; /*this is bad :D*/
+    /*margin: 5% 43%; /*this is bad :D*/
+}
+
+/*game screen*/
+
+.gamestats {
+    font-family: breadText;
+    /*tried flex box but the size of the elements change with diff input so.. bad idea*/
+}
+
+/*gameover screen spesifics*/
+
+.score-display {
+    font-family: breadText;
+    text-align: center;
 }
 
 /*

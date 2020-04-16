@@ -27,8 +27,8 @@ class Game {
         this.ctx = this.canvas.getContext("2d"); // just like the example
 
         // score and timer should be assigned here to their respective html elements so their value can be assigned through a var name
-        this.scoreElement = this.gameScreen.querySelector(".stats .score") // why do we not use "let this.scoreElemen.... ?""
-        this.timerElement = this.gameScreen.querySelector(".stats .timer") // addinf the countdown
+        this.scoreElement = this.gameScreen.querySelector(".gamestats .score") // why do we not use "let this.scoreElemen.... ?""
+        this.timerElement = this.gameScreen.querySelector(".gamestats .timer") // addinf the countdown
 
         // fixing canvas size, check later if ok
         // what how huh ???? 

@@ -22,16 +22,18 @@ let gameOverScreen;
 let splashStr = `
     <main>
         <h1><span style="font-size: small">a very</span> Bad StepMania Clone</h1>
-        <button>Start Game</button>
+        <div class="button-div">
+            <button>Start Game</button>
+        </div>
     </main>
 `
 let gameStr = `
     <main class = "game-container">
         <header>
-            <div class="stats">
+            <div class="gamestats">
                 <div>
                     <h2>Current score: 
-                        <span class="score"></span>
+                        <span class="score"> 0</span>
                     </h2>
                     <h2>
                         Time: <span class="timer"></span>
@@ -47,9 +49,11 @@ let gameStr = `
 `
 let gameOverStr = `
     <main>
-        <h1> g a m e  over</h1>
-        <h2>your score string interpolation: <span></span> </h2>
-        <button>restart button</button>
+        <h1>game over</h1>
+        <h2 class="score-display">your score string interpolation: <span></span> </h2>
+        <div class="button-div">
+            <button>restart</button>
+        </div>
     </main>
 `
 
