@@ -5,20 +5,21 @@ class Game {
         this.arrows = []; // holds arrow objects
         //this.arrowBoxes = []; // dont really need this atm
         this.timeIsUp = false; // teenkö timerin erikseen???
-        this.timer = 1500; // it's a fake! just counting animation frames lol
+        this.timer = 1600; // it's a fake! just counting animation frames lol
         this.score = 0;
         this.gameScreen = null;
         this.canvas = null;
         this.ctx = null;
-        this.left_x = 50;
-        this.middle_x = 200;
-        this.right_x = 420;
+        this.left_x = null; // changed to null from set x -values, maybe can remove this
+        this.middle_x = null;
+        this.right_x = null;
+        this.boxSize = 60;
         //this.paused = false; // default
 
     }
 
     //methods
-    start() { // this will literally just start the game, later will come the game loop where we update canvas all the time
+    start(mode) { // this will literally just start the game, later will come the game loop where we update canvas all the time
         // referencing the canvas and setting 2D context
         const canvasCont = document.querySelector(".canvas-container");
         console.log("check out canvasCont console log:")
@@ -33,9 +34,11 @@ class Game {
         // fixing canvas size, check later if ok
         // what how huh ???? 
         this.containerWidth = canvasCont.clientWidth;
+        // this will be used to define x-alignment:
         this.containerHeigth = canvasCont.clientHeight;
-
+        
         this.canvas.width = this.containerWidth;
+        this.widthSixth = (this.containerWidth / 6);
         this.canvas.height = this.containerHeigth;
         console.log(this.containerHeigth);
 
@@ -82,12 +85,55 @@ class Game {
 
         // here we jump into the game loop!
         console.log("next we're trying to invoke startGameLoop() which in turn invokes the gameLoop")
-        this.startGameLoop();
+        // condition on game mode:
+        if (mode === "hard") {
+            this.startGameLoop("hard")
+        }
+        else if (mode === "swap") {
+            this.startGameLoop(mode)
+        }
+
+        else {
+            this.startGameLoop("normal");
+        }
         console.log("this is coming after invoking startGameLoop()")
     }
 
-    startGameLoop() {
+    createArrows(speed) {
+        let arrowLotto = ["left", "right", "up"];
+        // statistics ppl look away now
+        let randomArrow = arrowLotto[(Math.round(Math.random() * (arrowLotto.length - 1)))]; // referencing by index
+        const newArrow = new Arrow(this.canvas, randomArrow, speed);
+        this.arrows.push(newArrow);
+
+    }
+// did this in like 2 min so copypasting...
+    createSwapArrows(speed) {
+        let arrowLotto = ["left", "right"];
+        // statistics ppl look away now
+        let randomArrow = arrowLotto[(Math.round(Math.random() * (arrowLotto.length - 1)))]; // referencing by index
+        const newArrow = new Arrow(this.canvas, randomArrow, speed);
+        this.arrows.push(newArrow);
+    }
+
+    startGameLoop(gamemode) { // needs mode
         // recursive structure creating a game loop, bind()ing it to the game object and then calling itself
+
+        // if mode jtn, set speed
+        let speed;
+        if (gamemode === "hard") {
+            speed = 20;
+        }
+        else if (gamemode === "normal") {
+            speed = 10;
+        }
+
+        else if (gamemode === "swap") {
+            speed = 25;
+        }
+        else {
+            speed = 10; //fallback if all else gails= :D
+        }
 
         const gameLoop = function () {
             this.timerElement.innerHTML = this.timer;
@@ -97,14 +143,18 @@ class Game {
             // DAMMIT JUST REALISED THIS COULD/SHOULD BE TIED TO THE TIMER (or its modulo 60 or somethignn)
 
             // requestanimationframe runs at ~60 Hz -> check every half second if should generate arrows           
-
-            if ((this.timer % 30 === 0) && (Math.random() > 0.25)) { // stealing this spawning condition, might tweak later
+            if (this.timer >= 1570 || this.timer <= 80) {
+                //chill ~ ~ needed a cooldown period
+            }
+            else if ((this.timer % 30 === 0) && (Math.random() > 0.20)) { // stealing this spawning condition, might tweak later
                 // random arrowtype:
-                let arrowLotto = ["left", "right", "up"];
-                // statistics ppl look away now
-                let randomArrow = arrowLotto[(Math.round(Math.random() * (arrowLotto.length - 1)))]; // referencing by index
-                const newArrow = new Arrow(this.canvas, randomArrow, 12);
-                this.arrows.push(newArrow);
+                if (gamemode !== "swap") {
+                    this.createArrows(speed); // remember to give speed here!
+                }
+                else {
+                    // gamemode IS swap
+                    this.createSwapArrows(speed);
+                }
 
             }
 
@@ -129,18 +179,41 @@ class Game {
 
 
             // clear canvas
-            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+
+            //this.ctx.font = "30px Arial";
+            //this.ctx.fillText("Hello World", middleLane, 450); // hehehe
 
             // draw on canvas
             // no point really giving these names but its more descriptive
-            let leftBox = this.drawBox(this.left_x); // just give the x-axis position here, the rest is preset inside drawBox()
-            let middleBox = this.drawBox(this.middle_x);
-            let rightBox = this.drawBox(this.right_x);
+            // left 1/6, middle 1/2 right 5/6, this.widthSixth
+            let leftLane = this.widthSixth - (this.boxSize/2)
+            let middleLane = 3 * this.widthSixth - (this.boxSize/2)
+            let rightLane = 5 * this.widthSixth - (this.boxSize/2)
+            this.drawBox(leftLane); // just give the x-axis position here, the rest is preset inside drawBox()
+/*                this.ctx.fillStyle = "red"
+                this.ctx.font = "Comic Sans MS 30px"
+                this.ctx.fillText("LEFT", leftLane, 500) */
+            this.drawBox(middleLane);
+            this.drawBox(rightLane);
             //testArrow.draw();
             // forEach arrow THAT IS ON SCREEN, draw()
 
             this.arrows.forEach(arrow => {
-                arrow.draw();
+                switch (arrow.type) {
+                    case "left":
+                        arrow.draw(leftLane);                       
+                        break;
+                
+                    case "right":
+                        arrow.draw(rightLane);
+                        break;
+                    case "up":
+                        arrow.draw(middleLane);
+                        break;
+
+                }
+
             });
 
             // we dont have a timer yet but.. let's make it somehow happen
@@ -301,10 +374,11 @@ class Game {
 
     drawBox(box_x) { // this is only optics
         // box_y and dimensions are hardcoded here
+    
 
-        const width = 60;
-        const height = 60;
-        const box_y = 500; // so the area to hit arrows is 500 ... 560 px on y-axis
+        const width = this.boxSize;
+        const height = this.boxSize;
+        const box_y = 450; // so the area to hit arrows is 450 ... 510 px on y-axis
 
         this.ctx.fillStyle = "black";
         this.ctx.fillRect(box_x, box_y, width, height); //syntax: ctx.fillRect(x, y, width, height)

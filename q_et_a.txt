@@ -51,4 +51,5 @@ vast:
 can i make my canvas size scalable? is that stupid?
 if i define canvas height in css (like now. 600px)
 
-
+-------------
+how to use the same fonts inside canvas?????

@@ -24,6 +24,8 @@ let splashStr = `
         <h1><span style="font-size: small">a very</span> Bad StepMania Clone</h1>
         <div class="button-div">
             <button>Start Game</button>
+            <button id="hard">Hard mode</button>
+            <button id="swap">under construction</button>
         </div>
     </main>
 `
@@ -44,7 +46,7 @@ let gameStr = `
             <div class = "canvas-container">
                 <canvas></canvas>
             </div>
-            <button>pointless button minä lopetan pelin että saadaan transitiot testattua</button>
+            <button style="margin: 0 43%;">quit game</button> <!--dirty hack-->
     </main>
 `
 let gameOverStr = `
@@ -53,6 +55,8 @@ let gameOverStr = `
         <h2 class="score-display">your score string interpolation: <span></span> </h2>
         <div class="button-div">
             <button>restart</button>
+            <button id="hard">hard mode</button>
+            <button id="back2main">Back to main</button>
         </div>
     </main>
 `
@@ -70,10 +74,13 @@ function createSplashScreen(splashString) {
     document.body.appendChild(splashScreen)
 
     const startBtn = splashScreen.querySelector("button");
-    startBtn.addEventListener("click", function () {
-        startGame();
-    });
+    startBtn.addEventListener("click", startGame);
+    const hardBtn = document.getElementById("hard");
+    hardBtn.addEventListener("click",startHardGame)
     // eventlistener call back func should be startGame!
+    const swapBtn = document.getElementById("swap");
+    swapBtn.addEventListener("click", startSwapGame);
+
 }
 
 function createGameScreen(htmlstring) {
@@ -90,12 +97,17 @@ function createGameOver(overString, score) {
     gameOverScreen = buildDom(overString);
     let yourScore = gameOverScreen.querySelector("span");
     yourScore.innerHTML = `${score}`;
+    document.body.appendChild(gameOverScreen);
 
     const restartBtn = gameOverScreen.querySelector("button");
     restartBtn.addEventListener("click", startGame);
     // add button just like is splash
+    const backBtn = document.getElementById("back2main");
+    //backBtn.addEventListener('click', location.reload);
+    //backBtn.addEventListener("click", createSplashScreen(splashStr)); // why cant I make thi s work????
+    const hardBtn = document.getElementById("hard");
+    hardBtn.addEventListener("click", startHardGame);
 
-    document.body.appendChild(gameOverScreen);
 }
 
 function removeScreen() {
@@ -114,7 +126,26 @@ function startGame() {
     game.gameScreen = gameScreen; // question, why we do it like this?
     // gameScreen is now set, now we need to jump into the loop by invoking it through our new game object
 
-    game.start();
+    //maybe we could bring in the difficulty from here???
+    game.start("normal");
+}
+
+function startHardGame() {
+    removeScreen();
+    createGameScreen(gameStr);
+    console.log("HARD MODE");
+    game = new Game();
+    game.gameScreen = gameScreen;
+    game.start("hard");
+}
+
+function startSwapGame() {
+    removeScreen();
+    createGameScreen(gameStr);
+    console.log("swap mode!");
+    game = new Game();
+    game.gameScreen = gameScreen;
+    game.start("swap");
 }
 
 function endGame(score) { // it's a very good idea to import score to gameover screen

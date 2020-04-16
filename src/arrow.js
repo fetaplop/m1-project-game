@@ -27,6 +27,8 @@ class Arrow {
         // x is determined by type, same as fillcolour
         this.speed = speed;
         this.type = type;
+        this.image = new Image();
+        this.image.src = "img/right.png"
         this.isAligned = null; // aligned with hitbox true/false -> changes colour + used to give pts
         this.x = null; // this is set in draw() depending on arrow type! x is not important otherwise
         // experimental part: (to make sure we don't score twice for same arrow)
@@ -38,7 +40,7 @@ class Arrow {
         //console.log("updatePosotion() called")
     }
 
-    draw() {
+    draw(lane) {
         //maybe we could set here that if the type is "belowScreen", just return or something. or remove it in the array? not update position?
         // -> decide later, not important now
         let colour;
@@ -50,16 +52,16 @@ class Arrow {
 
             if (this.type === "left") {
                 colour = "red";
-                this.x = 50;
+                this.x = lane;
             }
             else if (this.type === "right") {
                 colour = "green"
-                this.x = 420;
+                this.x = lane;
             }
 
             else if (this.type === "up") {
                 colour = "blue";
-                this.x = 200;
+                this.x = lane;
             }
 
             else {
@@ -69,7 +71,8 @@ class Arrow {
         }
         //console.log(this.y);
         this.ctx.fillStyle = colour;
-        this.ctx.fillRect(this.x, this.y, this.size, this.size);
+        this.ctx.fillRect(this.x, this.y, this.size + 10, this.size);
+        //this.ctx.drawImage(this.x, this.y, this.size, this.size)
     }
 
     boxCollision() { // this method could also update the game.js arrowbox????
@@ -77,7 +80,7 @@ class Arrow {
         let bottom = top + this.size;
         // x depends on arrrow type, we don't need to check for x-colliosion, only need it for drawing
         // collision range for y should be same
-        if ((bottom >= 500) && (top <= 560)) {
+        if ((bottom >= 450) && (top <= 510)) {
             switch (true) { // checking if the arrow is completely inside the hit area!
                 case this.type === "left":
                     // hit the left box!
