@@ -29,6 +29,8 @@ class Arrow {
         this.type = type;
         this.isAligned = null; // aligned with hitbox true/false -> changes colour + used to give pts
         this.x = null; // this is set in draw() depending on arrow type! x is not important otherwise
+        // experimental part: (to make sure we don't score twice for same arrow)
+        this.hitOnce = null;
     }
     //methods:
     updatePosition() {
@@ -41,7 +43,7 @@ class Arrow {
         // -> decide later, not important now
         let colour;
         // depends on arrrow type
-        if (this.isAligned === true) {
+        if (this.hitOnce === true) { // was: this.isAligned === true
             colour = "yellow";
             // doesnt x persist from before?? -> it does. also, omitting x should never be an issue since no arrow is aligned in the beginning
         } else {
@@ -84,6 +86,8 @@ class Arrow {
                     return true; // we could return  something additionally here so that we can tell the hit box to light up!
                 case this.type === "right":
                     //console.log("right arrow hit the hit area!")
+                    return true;
+                case this.type === "up":
                     return true;
                 default:
                     return false;

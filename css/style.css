@@ -3,6 +3,15 @@ canvas {
     height: 600px;
 }
 
+h1 {
+    font-size: 80px;
+}
+
+h1 span {
+    font-size: small;
+    /*font-style: oblique; */
+}
+
 /*
 note! ehkä vielä game-conatiner class sinne main.js:ään??
 

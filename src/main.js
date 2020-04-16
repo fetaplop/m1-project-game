@@ -21,7 +21,7 @@ let gameOverScreen;
 
 let splashStr = `
     <main>
-        <h1>u n n a m e d    r h y t h m    g a m e </h1>
+        <h1><span>very</span> Bad StepMania Clone</h1>
         <button>Start Game</button>
     </main>
 `
@@ -29,11 +29,14 @@ let gameStr = `
     <main class = "game-container">
         <header>
             <h1>this  g a m e </h1>
-            <div class="score">
-                <h3>some stuff here if we need, score at least</h3>
+            <div class="stats">
                 <div>
                     <h2>Current score: 
-                    <span class="value"> span inside h2, jolla class score, sub class value <span\>
+                    <span class="score"> span inside h2, jolla class stats, sub class value <span\>
+                    
+                    </h2>
+                    <h2>
+                    Time : <span class="timer"></span>
                     </h2>
                 </div>        
             </div>
