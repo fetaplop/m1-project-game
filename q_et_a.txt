@@ -43,6 +43,12 @@ vast:
 
 -------------
 so does he execution actually stop when we reach timeOver????
+---------------------
+how do I make the pausing work??
+vast:
+-------------------
 
+can i make my canvas size scalable? is that stupid?
+if i define canvas height in css (like now. 600px)
 
 
