@@ -31,6 +31,7 @@ class Game {
         this.timerElement = this.gameScreen.querySelector(".stats .timer") // addinf the countdown
 
         // fixing canvas size, check later if ok
+        // what how huh ???? 
         this.containerWidth = canvasCont.clientWidth;
         this.containerHeigth = canvasCont.clientHeight;
 
@@ -92,50 +93,36 @@ class Game {
             this.timerElement.innerHTML = this.timer;
 
             // start making arrows:
-            // maybe dont make new arrows when we're close to time running out
+            // maybe dont make new arrows when we're close to time running out?
             // DAMMIT JUST REALISED THIS COULD/SHOULD BE TIED TO THE TIMER (or its modulo 60 or somethignn)
 
-            // requestanimationframe runs at ~60 Hz -> check every half second if should generate arrows
+            // requestanimationframe runs at ~60 Hz -> check every half second if should generate arrows           
 
-            
-                
-            if ( (this.timer % 30 === 0) && (Math.random() > 0.35)) { // stealing this spawning condition, might tweak later
+            if ((this.timer % 30 === 0) && (Math.random() > 0.25)) { // stealing this spawning condition, might tweak later
                 // random arrowtype:
                 let arrowLotto = ["left", "right", "up"];
                 // statistics ppl look away now
                 let randomArrow = arrowLotto[(Math.round(Math.random() * (arrowLotto.length - 1)))]; // referencing by index
-                const newArrow = new Arrow(this.canvas, randomArrow, 10);
+                const newArrow = new Arrow(this.canvas, randomArrow, 12);
                 this.arrows.push(newArrow);
-                
+
             }
 
-            //testArrow = this.arrows[0];
-            //testArrow.updatePosition();
-
-            /*
-            if (testArrow.boxCollision() === true) {
-                testArrow.isAligned = true; // CHANGED THIS TO HILIGHT A HIT
-                console.log("we hit something!")
-            } else {
-                // we have to assign the alignment property to false
-                testArrow.isAligned = false;
-            }*/
-            // -> this is naw arrowAlignedWithBox(takes in arrow)
 
             // HERE looping thru arrow array and updating position and checking if aligned
 
 
             // get rid of arrows that are below screen
-            const visibleArrows = this.arrows.filter( function (arrow) {
+            const visibleArrows = this.arrows.filter(function (arrow) {
                 const visibleArrow = arrow.isOnScreen();
                 return visibleArrow;
-            } )
+            })
             this.arrows = visibleArrows;
 
             // update arrow positions and check if they hit the hitbox
-            this.arrows.forEach(arrow => { // added this!
+            this.arrows.forEach(arrow => {
                 arrow.updatePosition();
-                this.arrowAlignedWithBox(arrow); // this????
+                this.arrowAlignedWithBox(arrow);
                 // keypress alignment isn't checked here, it's defined in game methods and invoked from 
                 // keyPressListener that is defined inside start(). Score is updated there as well
             });
@@ -152,7 +139,7 @@ class Game {
             //testArrow.draw();
             // forEach arrow THAT IS ON SCREEN, draw()
 
-            this.arrows.forEach(arrow => { // added this keywd!
+            this.arrows.forEach(arrow => {
                 arrow.draw();
             });
 
@@ -178,7 +165,7 @@ class Game {
         gameLoop();
     }
 
-    togglePause() {
+    togglePause() { // this is great, but how to go back to gameloop?
         if (this.paused === true) {
             this.paused = false;
         }
@@ -188,7 +175,7 @@ class Game {
     }
 
     keyPressMatchesArrow(arrowtypeStr) {
-        this.arrows.forEach( arrow => { // forEach + this is tricky!! 
+        this.arrows.forEach(arrow => { // forEach + this is tricky!! using arrow function means that now _this refers to game, as we want it to
             if (arrow.isAligned === true) {
                 //tarkista muita asioita
                 switch (arrowtypeStr) {
@@ -203,7 +190,7 @@ class Game {
                             console.log("you hit left but something else is aligned ??!!")
                             this.updateScore(-100);
                         }
-                    break; // wont need a default
+                        break; // wont need a default
 
                     case "right":
                         if ((arrow.type === "right") && (arrow.hitOnce !== true)) {
@@ -215,7 +202,7 @@ class Game {
                             console.log("you hit right at the wrong time....");
                             this.updateScore(-100);
                         }
-                    break;
+                        break;
 
                     case "up":
                         if ((arrow.type === "up") && (arrow.hitOnce !== true)) {
@@ -227,7 +214,7 @@ class Game {
                             this.updateScore(-100);
                             console.log("wrong button1!");
                         }
-                    break;
+                        break;
                 }
             }
             /*else if ((arrow.isAligned !== true) && (arrowtypeStr === arrow.type)) {
@@ -293,12 +280,12 @@ class Game {
             arrow.isAligned = true; // CHANGED THIS TO HILIGHT A HIT
             //console.log("an arrow hit the y-limit")
         } else {
-            // we have to assign the alignment property to false
+            // we have to assign the alignment property to false since it's null by default (bc clarity!).
             arrow.isAligned = false;
         }
     }
 
-    // method for updating score??    
+    // method for updating score
     updateScore(givenScore) {
         this.score += givenScore;
         this.scoreElement.innerHTML = this.score;
