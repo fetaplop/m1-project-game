@@ -46,7 +46,15 @@ class Arrow {
         let colour;
         // depends on arrrow type
         if (this.hitOnce === true) { // was: this.isAligned === true
-            colour = "yellow";
+            if (this.type === "left") {
+                this.image.src = "img/left-invert.png"
+            } else if (this.type === "right") {
+                this.image.src = "img/right-invert.png"
+            } else if (this.type === "up") {
+                this.image.src = "img/up-invert.png"
+            }
+
+            //colour = "yellow";
             // doesnt x persist from before?? -> it does. also, omitting x should never be an issue since no arrow is aligned in the beginning
         } else {
 
