@@ -22,13 +22,13 @@ class Arrow {
     constructor(canvas, type, speed) {
         this.canvas = canvas;
         this.ctx = this.canvas.getContext("2d"); // i think we need this
-        this.size = 50;
+        this.size = 50; // was 50!!!
         this.y = 0;
         // x is determined by type, same as fillcolour
         this.speed = speed;
         this.type = type;
         this.image = new Image();
-        this.image.src = "img/right.png"
+        this.image.src = "img/Down.png"
         this.isAligned = null; // aligned with hitbox true/false -> changes colour + used to give pts
         this.x = null; // this is set in draw() depending on arrow type! x is not important otherwise
         // experimental part: (to make sure we don't score twice for same arrow)
@@ -51,7 +51,7 @@ class Arrow {
         } else {
 
             if (this.type === "left") {
-                colour = "red";
+                colour = "red"; // change this.image.srs = "image/different.png"
                 this.x = lane;
             }
             else if (this.type === "right") {
@@ -70,9 +70,9 @@ class Arrow {
             }
         }
         //console.log(this.y);
-        this.ctx.fillStyle = colour;
-        this.ctx.fillRect(this.x, this.y, this.size + 10, this.size);
-        //this.ctx.drawImage(this.x, this.y, this.size, this.size)
+        //this.ctx.fillStyle = colour;
+        //this.ctx.fillRect(this.x, this.y, this.size + 10, this.size);
+        this.ctx.drawImage(this.image, this.x, this.y, this.size, this.size)
     }
 
     boxCollision() { // suggetion! add an accuracy range for scoring!
@@ -86,6 +86,10 @@ class Arrow {
                     // hit the left box!
                     //console.log("left arrow hit the hit area")
                     //console.log(`my y is ${this.y}, top:${top}  and bottom ${bottom}`)
+
+                    //this.ctx.fillStyle = "yellow"
+                    //this.ctx.fillRect(this.x, top, 100, 100)
+
                     return true; // we could return  something additionally here so that we can tell the hit box to light up!
                     // like collisionArr = [boolean, accuracyGoodness]
                 case this.type === "right":

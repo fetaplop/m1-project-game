@@ -218,7 +218,7 @@ class Game {
             // we dont have a timer yet but.. let's make it somehow happen
             this.timer--;
             // displaying time!
-            this.timerElement.innerHTML = this.timer / 10; // could be better lol
+            this.timerElement.innerHTML = Math.floor(this.timer / 60); // add milliseconds!
             if (this.timer === 0) {
                 this.gameOver();
             } // keskekn!!!

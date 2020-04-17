@@ -105,10 +105,15 @@ function createGameOver(overString, score) {
     const backBtn = document.getElementById("back2main");
     // to make this work: create new function, where we call removeScreen and the createSplash..(str) !
 
-    //backBtn.addEventListener('click', location.reload);
-    //backBtn.addEventListener("click", createSplashScreen(splashStr)); // why cant I make thi s work????
+    //backBtn.addEventListener('click', location.reload); // maybe window.location.relaod
+    backBtn.addEventListener("click", backToMain); // why cant I make thi s work????
     const hardBtn = document.getElementById("hard");
     hardBtn.addEventListener("click", startHardGame);
+}
+
+function backToMain() {
+    removeScreen();
+    createSplashScreen(splashStr);
 
 }
 
