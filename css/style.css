@@ -17,7 +17,8 @@
 
 body {
     overflow-y: hidden;
-    background-image: url(img/generic_retro.jpg);
+    background-image: url(../img/generic_retro.jpg);
+    background-size: cover;
     background-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -28,6 +29,7 @@ canvas {
 
 h1 {
     font-family: 'linear_beam___0.5';
+    color: #FF9BB2;
     font-size: 150px;
     /*line-height: 100px;*/
     font-style: normal;
@@ -41,7 +43,10 @@ h1 {
 
 button {
     padding: 15px;
+    background-color: blueviolet;
+    border-color: blueviolet;
     font-family: breadText;
+    color: #2C1451;
     font-size: 20px;
     border-radius: 5px;
     /*margin: 5% 43%; /*this is bad :D*/
@@ -58,6 +63,7 @@ button {
 
 .score-display {
     font-family: breadText;
+    color: #5CD3EF;
     text-align: center;
 }
 
