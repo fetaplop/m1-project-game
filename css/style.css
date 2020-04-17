@@ -25,6 +25,7 @@ body {
 canvas {
     /*background-color: blueviolet;*/
     height: 600px;
+
 }
 
 h1 {
@@ -56,6 +57,7 @@ button {
 
 .gamestats {
     font-family: breadText;
+    color: #5CD3EF;
     /*tried flex box but the size of the elements change with diff input so.. bad idea*/
 }
 
