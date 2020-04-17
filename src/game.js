@@ -376,11 +376,11 @@ class Game {
 
         // suggestion: make the boxes the same colour as arrow so you could see them align    
 
-        const width = this.boxSize;
+        const width = 50; // made it smaller!
         const height = this.boxSize;
         const box_y = 450; // so the area to hit arrows is 450 ... 510 px on y-axis
 
-        this.ctx.fillStyle = "black";
+        this.ctx.fillStyle = "purple";
         this.ctx.fillRect(box_x, box_y, width, height); //syntax: ctx.fillRect(x, y, width, height)
     }
 

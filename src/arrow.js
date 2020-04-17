@@ -28,7 +28,7 @@ class Arrow {
         this.speed = speed;
         this.type = type;
         this.image = new Image();
-        this.image.src = "img/Down.png"
+        this.image.src = "img/test.png"
         this.isAligned = null; // aligned with hitbox true/false -> changes colour + used to give pts
         this.x = null; // this is set in draw() depending on arrow type! x is not important otherwise
         // experimental part: (to make sure we don't score twice for same arrow)
@@ -51,16 +51,19 @@ class Arrow {
         } else {
 
             if (this.type === "left") {
-                colour = "red"; // change this.image.srs = "image/different.png"
+                //colour = "red"; // change this.image.srs = "image/different.png"
+                this.image.src = "img/left.png"
                 this.x = lane;
             }
             else if (this.type === "right") {
-                colour = "green"
+                //colour = "green"
+                this.image.src = "img/right.png"
                 this.x = lane;
             }
 
             else if (this.type === "up") {
-                colour = "blue";
+                //colour = "blue";
+                this.image.src = "img/up.png"
                 this.x = lane;
             }
 
