@@ -103,6 +103,8 @@ function createGameOver(overString, score) {
     restartBtn.addEventListener("click", startGame);
     // add button just like is splash
     const backBtn = document.getElementById("back2main");
+    // to make this work: create new function, where we call removeScreen and the createSplash..(str) !
+
     //backBtn.addEventListener('click', location.reload);
     //backBtn.addEventListener("click", createSplashScreen(splashStr)); // why cant I make thi s work????
     const hardBtn = document.getElementById("hard");

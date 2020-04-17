@@ -75,7 +75,7 @@ class Arrow {
         //this.ctx.drawImage(this.x, this.y, this.size, this.size)
     }
 
-    boxCollision() { // this method could also update the game.js arrowbox????
+    boxCollision() { // suggetion! add an accuracy range for scoring!
         let top = this.y;
         let bottom = top + this.size;
         // x depends on arrrow type, we don't need to check for x-colliosion, only need it for drawing
@@ -87,6 +87,7 @@ class Arrow {
                     //console.log("left arrow hit the hit area")
                     //console.log(`my y is ${this.y}, top:${top}  and bottom ${bottom}`)
                     return true; // we could return  something additionally here so that we can tell the hit box to light up!
+                    // like collisionArr = [boolean, accuracyGoodness]
                 case this.type === "right":
                     //console.log("right arrow hit the hit area!")
                     return true;

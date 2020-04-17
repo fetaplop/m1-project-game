@@ -185,7 +185,6 @@ class Game {
             //this.ctx.fillText("Hello World", middleLane, 450); // hehehe
 
             // draw on canvas
-            // no point really giving these names but its more descriptive
             // left 1/6, middle 1/2 right 5/6, this.widthSixth
             let leftLane = this.widthSixth - (this.boxSize/2)
             let middleLane = 3 * this.widthSixth - (this.boxSize/2)
@@ -374,7 +373,8 @@ class Game {
 
     drawBox(box_x) { // this is only optics
         // box_y and dimensions are hardcoded here
-    
+
+        // suggestion: make the boxes the same colour as arrow so you could see them align    
 
         const width = this.boxSize;
         const height = this.boxSize;
