@@ -53,6 +53,7 @@ let gameOverStr = `
     <main>
         <h1>game over</h1>
         <h2 class="score-display">your score string interpolation: <span></span> </h2>
+        <div id="hiscores"></div>
         <div class="button-div">
             <button>restart</button>
             <button id="hard">hard mode</button>
@@ -109,6 +110,42 @@ function createGameOver(overString, score) {
     backBtn.addEventListener("click", backToMain); // why cant I make thi s work????
     const hardBtn = document.getElementById("hard");
     hardBtn.addEventListener("click", startHardGame);
+
+    // local storage!
+    const topScores = [ {name: "Guybrush Threepwood", score: 22000}, {name: "Dad", score: 10000}]
+    const topScoreStr = JSON.stringify(topScores);
+    console.log("topScoreStr before stroing:" ,topScoreStr);
+
+    localStorage.setItem("topScores", topScoreStr);
+
+    // retrieve:
+
+    const scoreStrFromLS = localStorage.getItem("topScores");
+    //parse:
+    retrievedScores = JSON.parse(scoreStrFromLS);
+
+    let hiscores = document.getElementById("hiscores");
+
+    /*
+    for (let i = 0; i < retrievedScores.length; i++) {
+        let newEntry = document.hiscores.createElement("LI");
+        let entryText = document.hiscores.createTextNode("new entry") 
+        newEntry.appendChild(entryText) 
+        //const element = retrievedScores[index];
+        //let entry = hiscores.appendChild(ul);
+        
+    }
+
+
+    hiscores.innerHTML = retrievedScores */
+
+    // structure: default: display topscores. IF you reach top-10, ask for name input and append topscores, display topscores
+
+
+
+    console.log(scoreStrFromLS);
+
+
 }
 
 function backToMain() {

@@ -69,6 +69,12 @@ button {
     text-align: center;
 }
 
+#hiscores {
+    font-family: breadText;
+    font-size: medium;
+    color: #5CD3EF;
+}
+
 /*
 note! ehkä vielä game-conatiner class sinne main.js:ään??
 
