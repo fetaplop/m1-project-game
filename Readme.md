@@ -6,11 +6,10 @@ The player tries to hit arrow keys on their keyboard in sync with arrows falling
 
 
 ## MVP / Main Features
-	- Arrows (boxes to begin with) fall on their assigned "lanes" from screen top to bottom.
-	- Player has to hit the corresponding key when the arrow falls to the bottom (to a set y-value).
-	- Player gets points for hitting the  correct key at the right time.
-	- Game lasts for a set time, "song length". Game ends when time runs out.
-    - Gain pts for correct key (maybe lose pts for wrong key)
+- Arrows (boxes to begin with) fall on their assigned "lanes" from screen top to bottom.
+- Player has to hit the corresponding key when the arrow falls to the bottom to a set hit area represented by a box.
+- Player gains points for hitting the correct key when it is aligned with its corresponding box. (Player loses pts for incorrect key)
+- Game lasts for a set time, "song length". Game ends when time runs out.
 
 
 ## Backlog
@@ -19,13 +18,10 @@ The player tries to hit arrow keys on their keyboard in sync with arrows falling
 - change difficulty (hard mode already implemented)
 - reverse mode! hit the opposite key !
 - instructions on how to play
-
 - Actually synced with music.
--> This means hard-coded strikes..
-
-- if this is impossible, change the design to be a reaction game.
--> the blocks start falling faster after set intervals
-
+  - This means hard-coded strikes..
+- -> if this is impossible, change the design to be a reaction game only
+  - the blocks start falling faster after set intervals
 - visual effects on arrow-boxes (hilight if key stroke in sync etc)
 
 
