@@ -5,7 +5,7 @@
 The player tries to hit arrow keys on their keyboard in sync with arrows falling from the top of the screen as they hit the bottom of the screen. Points are gained by hitting the right key at the right time. There is a time limit. Play the game [here!](https://fetaplop.github.io/m1-project-game/)
 
 
-## MVP (DOM - CANVAS)
+## MVP / Main Features
 	- Arrows (boxes to begin with) fall on their assigned "lanes" from screen top to bottom.
 	- Player has to hit the corresponding key when the arrow falls to the bottom (to a set y-value).
 	- Player gets points for hitting the  correct key at the right time.
@@ -14,13 +14,14 @@ The player tries to hit arrow keys on their keyboard in sync with arrows falling
 
 
 ## Backlog
+- leaderboards!
 - disable the possibility to get double points by hitting twice in fast succession (solved)
-- change difficulty
+- change difficulty (hard mode already implemented)
 - reverse mode! hit the opposite key !
-- instructions
+- instructions on how to play
 
 - Actually synced with music.
--> This means hard-coded strikes.
+-> This means hard-coded strikes..
 
 - if this is impossible, change the design to be a reaction game.
 -> the blocks start falling faster after set intervals
@@ -29,71 +30,28 @@ The player tries to hit arrow keys on their keyboard in sync with arrows falling
 
 
 ## Data structure
-	1. index.html
-	2. main.js
-	3. game.js
-    4. arrow.js
+1. index.html
+2. main.js
+3. game.js
+4. arrow.js
 
 ### 1. index.html
 Initialise html page and call scripts that run the game.
 
 ### 2. main.js
-buildDom
-
-createSplashScreen
-
-createGameScreen
-
-createGameover
-
-removeScreen
-
-window eventListener start on load
+Switch between different states (splash screen, game screen, game over etc.) and create HTML elements.
 
 ### 3. game.js
-#### properties:
-ctx
-canvas
-gameScreen
-"arrow-goals" that should align with falling arrows
-score
-timer
-
-#### methods:
-eventListener for key presses -> highlight pressed key
-check if collision (between arrow and arrow-goal)
-check if correct key press
-check if key press was within acceptable accuracy
-update score
-update positions
-loop to remove old + draw new frame
-check if time is up
+Holds the class Game with all the game properties like score, canvas, timer etc. The method start(mode) initialises a new game with event listeners and takes the game mode (normal or hard) as its argument. It invokes the method startGameLoop(mode) that creates new arrows (with different speeds depending on the game mode) using the Arrow class, updates and draws them until time runs out and the game ends. Other methods inside the class Game check for arrow collision on hit area, check if the player hits the correct keys at the right time and gives or reduces points accordingly or updates the player score and finally passes the score value to game over screen. 
 
 ### 4. arrow.js
-#### properties:
-- canvas
-- ctx
-- size
-- speed
-- arrowType (up, down, left, right)
-- position x (depends on arrowType)
-- position y
-- image
-- image source
-- isAligned
-- hitOnce
-
-#### methods:
-- updatePosition
-- draw
-- boxCollision
-- isOnScreen
+Holds the class Arrow with properties such as arrow type, speed, position, image and ones that tell if the arrow is aligned with its hitbox or if the player already hit it. The methods update the arrow position, draw, check for box collision or check if the arrow is still on screen.
 
 ## States and State Transitions
 
 - SplashScreen
    - Display splash screen
-   - Start game when start is pressed
+   - Start game when start button is clicked
 
 - GameScreen
    - game runs while timer has not run out
@@ -103,30 +61,7 @@ check if time is up
    - display player points
    - display high scores (BACKLOG)
    - if restart button is pressed, go to game screen
-
-
-## Task
-- git + github
-- html boilerplate
-- connect all files
-- buildDom
-- create screens in main
-- make screen transitions in main
-- create game constructor
-- make the game loop
-- arrow constructor
-- create moving arrows inside game loop
-- check arrow collision on arrow-boxes
-- make keyListeners
-- change arrow-box style if key was pressed
-- check if arrow hitting arrow-box + key press were in sync
-- score 
-- timer
-- dislay result in gameover
-- add images
-- add other visual styles
-- scoreboard
-- reload to main
+   - if 'back to main' button is presssed, go to splash screen
 
 
 ## Links
