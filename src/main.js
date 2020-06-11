@@ -183,7 +183,7 @@ function startSwapGame() {
 }
 
 // create game over screen
-function endGame(score) { // import score from game to show it in end screen and hiscores
+function endGame(score) { // import score from game
     // bug/feature when player clicks end game from game window; gameover doesn*T GET THE SCORE
     removeScreen();
     createGameOver(gameOverStr, score); // gameOverStr
