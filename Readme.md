@@ -38,10 +38,10 @@ Initialise html page and call scripts that run the game.
 Switch between different states (splash screen, game screen, game over etc.) and create HTML elements.
 
 ### 3. game.js
-Holds the class Game with all the game properties like score, canvas, timer etc. The method start(mode) initialises a new game with event listeners and takes the game mode (normal or hard) as its argument. It invokes the method startGameLoop(mode) that creates new arrows (with different speeds depending on the game mode) using the Arrow class, updates and draws them until time runs out and the game ends. Other methods inside the class Game check for arrow collision on hit area, check if the player hits the correct keys at the right time and gives or reduces points accordingly or updates the player score and finally passes the score value to game over screen. 
+Holds the class ```Game``` with all the game properties like score, canvas, timer etc. The method ```start(mode)``` initialises a new game with event listeners and takes the game mode (normal or hard) as its argument. It invokes the method ```startGameLoop(mode)``` that creates new arrows (with different speeds depending on the game mode) using the ```Arrow``` class, updates and draws them until time runs out and the game ends. Other methods check for arrow collision on hit area, check if the player hits the correct keys at the right time, gives or reduces points or updates the player score and finally passes the score value to game over screen. 
 
 ### 4. arrow.js
-Holds the class Arrow with properties such as arrow type, speed, position, image and ones that tell if the arrow is aligned with its hitbox or if the player already hit it. The methods update the arrow position, draw, check for box collision or check if the arrow is still on screen.
+Holds the class ```Arrow``` with properties such as arrow type, speed, position, image and ones that tell if the arrow is aligned with its hitbox or if the player already hit it. The methods update the arrow position, draw, check for box collision or check if the arrow is still on screen.
 
 ## States and State Transitions
 
