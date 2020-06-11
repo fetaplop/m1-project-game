@@ -35,6 +35,7 @@ The player tries to hit arrow keys on their keyboard in sync with arrows falling
     4. arrow.js
 
 ### 1. index.html
+Initialise html page and call scripts that run the game.
 
 ### 2. main.js
 buildDom
