@@ -103,7 +103,7 @@ function createGameOver(overString, score) {
     hardBtn.addEventListener("click", startHardGame);
 
 
-    // ------------------------------ hiscores still under construction: ---------------------
+    // ------------------------------ hiscores still under construction (here be dragons): ---------------------
     // local storage!
     const topScores = [{name: "Guybrush Threepwood", score: 22000}, {name: "Dad", score: 10000}]
     const topScoreStr = JSON.stringify(topScores);
@@ -119,7 +119,6 @@ function createGameOver(overString, score) {
 
     let hiscores = document.getElementById("hiscores");
 
-
     /*
     for (let i = 0; i < retrievedScores.length; i++) {
         let newEntry = document.hiscores.createElement("LI");
@@ -129,7 +128,6 @@ function createGameOver(overString, score) {
         //let entry = hiscores.appendChild(ul);
         
     }
-
 
     hiscores.innerHTML = retrievedScores */
 
@@ -184,13 +182,12 @@ function startSwapGame() {
 
 // create game over screen
 function endGame(score) { // import score from game
-    // bug/feature when player clicks end game from game window; gameover doesn*T GET THE SCORE
+    // bug/feature when player clicks end game from game window; gameover doesn't get the score
+    // EITHER REMOVE THE QUIT GAME BUTTON FROM GAME WINDOW OR MAKE IT AN ACTUAL FEATURE
     removeScreen();
-    createGameOver(gameOverStr, score); // gameOverStr
-    console.log(`I got the score: -- ${score} pts -- from game obj, hopefully`)
-    // huoma scorella ei vielä tehä mitään! sen pitäis tulla tuolta game.js:stä 
-
-    // 
+    createGameOver(gameOverStr, score);
+    //console.log(`I got the score: -- ${score} pts -- from game obj, hopefully`)
+    // display hiscores at some point in life
 }
 
 // create splash screen only after everything is loaded!
