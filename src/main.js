@@ -1,23 +1,15 @@
-/*
+/* will need at least these functions:
 buildDom
-
 createSplashScreen
-
 createGameScreen
-
 createGameover
-
 window eventListener start on load
-
 */
-
-// määrittele tässä tyhjiä muuttujia let game; jne
 
 let game;
 let splashScreen;
 let gameScreen;
 let gameOverScreen;
-// tarviiks muuta?
 
 let splashStr = `
     <main>
@@ -62,14 +54,14 @@ let gameOverStr = `
     </main>
 `
 
-// use this to create html elements
+// creates html elements
 function buildDom(htmlString) {
     const containerDiv = document.createElement("div"); // holds the html element and can be used to retrieve that element
     containerDiv.innerHTML = htmlString;
     return containerDiv.children[0];
 }
 
-// ehkä ei laiteta sitä stringiä tähän vaan alitetaan kaikki peräkkäin alkuun??? nii et voi verrata =????
+// create splash screen from the html string and add event listeners to it to start game
 function createSplashScreen(splashString) {
     splashScreen = buildDom(splashString);
     document.body.appendChild(splashScreen)
@@ -77,7 +69,7 @@ function createSplashScreen(splashString) {
     const startBtn = splashScreen.querySelector("button");
     startBtn.addEventListener("click", startGame);
     const hardBtn = document.getElementById("hard");
-    hardBtn.addEventListener("click",startHardGame)
+    hardBtn.addEventListener("click", startHardGame)
     // eventlistener call back func should be startGame!
     const swapBtn = document.getElementById("swap");
     swapBtn.addEventListener("click", startSwapGame);
@@ -85,13 +77,13 @@ function createSplashScreen(splashString) {
 }
 
 function createGameScreen(htmlstring) {
-    // buildom invoke
+    // buildDom invoke
     gameScreen = buildDom(htmlstring);
     document.body.appendChild(gameScreen);
-    //restartBtn.addEventListener("click", startGame); mallina tässä!
+
+    //creating this to make testing easier!! needs another look
     const turhaButton = gameScreen.querySelector("button");
-    // this isn't breaking the gameloop now!!! gameloop only looks if the timer has run out.
-    turhaButton.addEventListener("click", endGame); // muista et endGame -funktio kutsutaan ilman () koska se on vaan muuttujanimi sille funktiolle!
+    turhaButton.addEventListener("click", endGame); // (remember not to actually call the endGame functtion here )
 }
 
 function createGameOver(overString, score) {
@@ -106,15 +98,16 @@ function createGameOver(overString, score) {
     const backBtn = document.getElementById("back2main");
     // to make this work: create new function, where we call removeScreen and the createSplash..(str) !
 
-    //backBtn.addEventListener('click', location.reload); // maybe window.location.relaod
-    backBtn.addEventListener("click", backToMain); // why cant I make thi s work????
+    backBtn.addEventListener("click", backToMain);
     const hardBtn = document.getElementById("hard");
     hardBtn.addEventListener("click", startHardGame);
 
+
+    // ------------------------------ hiscores still under construction: ---------------------
     // local storage!
-    const topScores = [ {name: "Guybrush Threepwood", score: 22000}, {name: "Dad", score: 10000}]
+    const topScores = [{name: "Guybrush Threepwood", score: 22000}, {name: "Dad", score: 10000}]
     const topScoreStr = JSON.stringify(topScores);
-    console.log("topScoreStr before stroing:" ,topScoreStr);
+    //console.log("topScoreStr before stroing:", topScoreStr);
 
     localStorage.setItem("topScores", topScoreStr);
 
@@ -125,6 +118,7 @@ function createGameOver(overString, score) {
     retrievedScores = JSON.parse(scoreStrFromLS);
 
     let hiscores = document.getElementById("hiscores");
+
 
     /*
     for (let i = 0; i < retrievedScores.length; i++) {
@@ -141,9 +135,8 @@ function createGameOver(overString, score) {
 
     // structure: default: display topscores. IF you reach top-10, ask for name input and append topscores, display topscores
 
-
-
     console.log(scoreStrFromLS);
+    // ^------------------------------ hiscores still under construction ---------------------
 
 
 }
@@ -151,7 +144,6 @@ function createGameOver(overString, score) {
 function backToMain() {
     removeScreen();
     createSplashScreen(splashStr);
-
 }
 
 function removeScreen() {
@@ -161,16 +153,13 @@ function removeScreen() {
 function startGame() {
     removeScreen();
     createGameScreen(gameStr);
-    console.log("we're in game screen");
-    // täältä pitäis kutsua uus peli ja pelin ite pitäis tietää sillon ku se loppuu.
-    // silloin uuden pelin invoken jälkeen kun se on suorittanut loppuun voi vaan suoraan ajaa andGamen, joka saa
-    // pelitltä scoren. eli ei mittään iffiä että onko peli loppunu tänne mainiin!
+    //console.log("we're in game screen");
 
+    // create a new Game object. The game itself knows when it ends and will call endGame and pass it player score
     game = new Game();
-    game.gameScreen = gameScreen; // question, why we do it like this?
-    // gameScreen is now set, now we need to jump into the loop by invoking it through our new game object
+    game.gameScreen = gameScreen;
 
-    //maybe we could bring in the difficulty from here???
+    //give the game difficulty here
     game.start("normal");
 }
 
@@ -183,6 +172,7 @@ function startHardGame() {
     game.start("hard");
 }
 
+// UNDER CONSTRUCTION
 function startSwapGame() {
     removeScreen();
     createGameScreen(gameStr);
@@ -192,8 +182,9 @@ function startSwapGame() {
     game.start("swap");
 }
 
-function endGame(score) { // it's a very good idea to import score to gameover screen
-    // pretty sure täällä vois handlata sen et jos klikkaa end game gameScreenissä nii vois vaan asettaa et timeIsUp true to quit gameloop
+// create game over screen
+function endGame(score) { // import score from game to show it in end screen and hiscores
+    // bug/feature when player clicks end game from game window; gameover doesn*T GET THE SCORE
     removeScreen();
     createGameOver(gameOverStr, score); // gameOverStr
     console.log(`I got the score: -- ${score} pts -- from game obj, hopefully`)
