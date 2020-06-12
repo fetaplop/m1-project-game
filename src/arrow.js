@@ -16,8 +16,6 @@ amIonScreen
 
 */
 
-// pitääkö hard-koodata se tietty korkeus ja sen perusteella arvioida, onko arrow "hot" vai "cold"
-
 class Arrow {
     constructor(canvas, type, speed) {
         this.canvas = canvas;
