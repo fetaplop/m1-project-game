@@ -287,7 +287,7 @@ class Game {
         endGame(this.score);
     }
 
-    // draw boxes so player can estimate when to hit the keys
+    // draw boxes so player can visually estimate when to hit the keys
     drawBox(box_x) {
         // box_y and dimensions are hardcoded here
 

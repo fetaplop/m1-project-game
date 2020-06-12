@@ -19,31 +19,30 @@ amIonScreen
 class Arrow {
     constructor(canvas, type, speed) {
         this.canvas = canvas;
-        this.ctx = this.canvas.getContext("2d"); // i think we need this
-        this.size = 50; // was 50!!!
+        this.ctx = this.canvas.getContext("2d");
+        this.size = 50;
         this.y = 0;
         // x is determined by type, same as fillcolour
+        this.x = null; // this is set in draw() depending on arrow type! x is not important otherwise
         this.speed = speed;
         this.type = type;
         this.image = new Image();
-        this.image.src = "img/test.png"
+        this.image.src = "img/test.png" // just make this null?
         this.isAligned = null; // aligned with hitbox true/false -> changes colour + used to give pts
-        this.x = null; // this is set in draw() depending on arrow type! x is not important otherwise
-        // experimental part: (to make sure we don't score twice for same arrow)
-        this.hitOnce = null;
+        this.hitOnce = null; // to make sure we don't score twice for same arrow
     }
     //methods:
+
+    
     updatePosition() {
         this.y = this.y + this.speed;
-        //console.log("updatePosotion() called")
     }
 
     draw(lane) {
-        //maybe we could set here that if the type is "belowScreen", just return or something. or remove it in the array? not update position?
-        // -> decide later, not important now
-        let colour;
-        // depends on arrrow type
-        if (this.hitOnce === true) { // was: this.isAligned === true
+
+        let colour; // depends on arrrow type
+        //change arrow colour if it is hit, else it's default colour
+        if (this.hitOnce === true) { // was: this.isAligned === true (kinda cool behaviour, maybe implement it again somehow?)
             if (this.type === "left") {
                 this.image.src = "img/left-invert.png"
             } else if (this.type === "right") {
@@ -74,21 +73,25 @@ class Arrow {
             }
 
             else {
-                console.log("arrow type may not be passing correct! not gonna draw anything new :P");
+                console.log("arrow type may not be passing correct! debug message from arrow.draw(lane), not drawing anything!");
                 return;
             }
         }
-        //console.log(this.y);
+        // drawing boxes to represent falling arrows
         //this.ctx.fillStyle = colour;
         //this.ctx.fillRect(this.x, this.y, this.size + 10, this.size);
+
         this.ctx.drawImage(this.image, this.x, this.y, this.size, this.size)
     }
 
-    boxCollision() { // suggetion! add an accuracy range for scoring!
+    // checks if the arrow is within set hit y-range, as in, did it collide with the hit box
+    // returns boolean
+    boxCollision() { 
+        // suggestion! add an accuracy range for scoring!
         let top = this.y;
         let bottom = top + this.size;
         // x depends on arrrow type, we don't need to check for x-colliosion, only need it for drawing
-        // collision range for y should be same
+        // collision range for y is same for every arrow
         if ((bottom >= 450) && (top <= 510)) {
             switch (true) { // checking if the arrow is completely inside the hit area!
                 case this.type === "left":
@@ -110,28 +113,13 @@ class Arrow {
                     return false;
             }
         }
-
-        /*switch(expression) {
-            case x:
-              // code block
-              break;
-            case y:
-              // code block
-              break;
-            default:
-              // code block
-          }*/
-
     }
 
+    // check if y > lower limit of screen
     isOnScreen() {
-        // check if y>lower limit of screen
-        //return true/false
         if (this.y < this.canvas.height) {
             return true;
         }
 
     }
-    //    this.ctx.fillStyle = "blue";
-    //      this.ctx.fillRect(this.x, this.y, this.size, this.size);
 }
