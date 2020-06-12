@@ -50,7 +50,6 @@ button {
     color: #2C1451;
     font-size: 20px;
     border-radius: 5px;
-    /*margin: 5% 43%; /*this is bad :D*/
 }
 
 /*game screen*/
@@ -58,7 +57,7 @@ button {
 .gamestats {
     font-family: breadText;
     color: #5CD3EF;
-    /*tried flex box but the size of the elements change with diff input so.. bad idea*/
+    /*tried flex box but the size of the elements change with diff input so.. bad idea :D*/
 }
 
 /*gameover screen spesifics*/
@@ -70,17 +69,13 @@ button {
 }
 
 #hiscores {
-    font-family: breadText;
+    font-family: breadText; 
+    /* ^ might want to use something else for these? */
     font-size: medium;
     color: #5CD3EF;
 }
 
 /*
-note! ehkä vielä game-conatiner class sinne main.js:ään??
-
-noniii voi vittu. eli se class "canvas-container" literally vaan pitää sisällään tän canvasin, en välttämättä oikeesti ees tarvis sitä mut I 
-guess se on olemassa että siihen voi laittaa jonku taustakuvan vaikka
-
-en myöskään tiiä miks helvetissä se revitty korkeus on jtn 154 pikseliä atm mut sen v oi hardkoodata tähän
-
+class "canvas-container" literally just contais the canvas so could get rid of it???
+was supposed to add a background img to it but the game background works great!
 */
